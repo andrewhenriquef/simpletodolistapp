@@ -1,10 +1,22 @@
 <h1>TODO List</h2>
 
 <%= link_to 'Create new activity', new_activity_path %>
+<div class="row">
+        <h2 class=" col-md-12 text-center">Activities</h2>
+    <div class="col-md-4">
+    </div>
+    
 
-<h2>Activities</h2>
-<% @activities.each do |activity| %>
-    <p><%= activity.title %></p>
-    <%= link_to 'edit', edit_activity_path(activity)%>
-    <%= link_to 'delete' %>
-<%end%>
+    <div class="col-md-4 sortable">
+        <% @activities.each do |activity| %>
+            <div class="card" data-id="<%= activity.id %>">
+                <p class="card-text"><%= activity.title %></p>
+                <%= link_to 'edit', edit_activity_path(activity)%>
+                <%= link_to 'delete' %>
+            </div>
+        <%end%>
+    </div>
+
+    <div class="col-md-4">
+    </div>
+</div>

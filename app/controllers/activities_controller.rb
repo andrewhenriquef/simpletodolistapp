@@ -2,7 +2,6 @@ class ActivitiesController < ApplicationController
   
   def index
     @activities = Activity.all
-    @activity = Activity.new
   end
 
   def new 
@@ -10,7 +9,6 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-
     @activity = Activity.new(activity_params)
     
     respond_to do |format|

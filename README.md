@@ -111,7 +111,7 @@ rails server
 ```
 Se a aplicação exibir as duas atividades, elas está configurada corretamente.
 
-Para dar continuidade, vamos instalar essas duas gems, a [jquery-rails](https://github.com/rails/jquery-rails) e a [jquery-ui-rails](https://github.com/jquery-ui-rails/jquery-ui-rails).Essas duas gems nos dão acesso as funcionalidades do JQuery e o JQuery UI. Para saber como instalar, basta acessar aos links e seguir a instalação.
+Para dar continuidade, vamos instalar algumas gems. O [bootstrap](https://github.com/twbs/bootstrap-rubygem) e o [jquery-rails](https://github.com/rails/jquery-rails) e a [jquery-ui-rails](https://github.com/jquery-ui-rails/jquery-ui-rails). Essas duas ultimas gems nos dão acesso as funcionalidades do JQuery e o JQuery UI. Para saber como instalar as gems, basta acessar aos links e seguir os passos de instalação.
 
 O proximo desafio é implementar a biblioteca JavaScript que vai nos permitir trabalhar com o drag and drop no rails. Ela é o [html5sortable](https://github.com/lukasoppermann/html5sortable/tree/master/dist), vamos acessar ao arquivo html.sortable.js e copiar todo o conteudo presente no arquivo.
 

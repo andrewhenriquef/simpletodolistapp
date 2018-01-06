@@ -1,0 +1,10 @@
+<h1>TODO List</h2>
+
+<%= link_to 'Create new activity', new_activity_path %>
+
+<h2>Activities</h2>
+<% @activities.each do |activity| %>
+    <p><%= activity.title %></p>
+    <%= link_to 'edit', edit_activity_path(activity)%>
+    <%= link_to 'delete' %>
+<%end%>

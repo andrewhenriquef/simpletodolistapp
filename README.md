@@ -24,7 +24,21 @@ Things you may want to cover:
 * ...
 
 
-To Create a sortable list ->
+
+Para criarmos uma aplicação simples de lista de afazeres utilizando do framework rails e da biblioteca de drag and drop, precisamos seguir os seguintes passos.
+
+
+Em primeiro lugar devemos criar uma nova aplicação
+
+```
+rails new simpletodolistapp --database=postgresql
+```
+
+Esse comando criar uma nova aplicação rails com o banco de dados postresql
+
+Feito isso devemos configurar nosso database.yml, adicionando nosso username e password
+
+
 
 Install jquery and jquery ui rails
 [jquery-rails](https://github.com/rails/jquery-rails) and [jquery-ui-rails](https://github.com/jquery-ui-rails/jquery-ui-rails) gems 

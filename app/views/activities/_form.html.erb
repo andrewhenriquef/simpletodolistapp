@@ -1,5 +1,15 @@
-<%= form_with model: @activity do |form|%>
-    <%= form.label :title %>
-    <%= form.text_field :title%>
-    <%= form.submit 'Save' %>
-<%end%>
+<div class="col-md-3">
+</div>
+
+<div class="col-md-6 card">
+    <%= form_with model: @activity do |form|%>
+        <div class="form-group">
+            <%= form.label :title %>
+            <%= form.text_field :title, class: "form-control"%>
+        </div>
+        <%= form.submit 'Save', class: "btn btn-primary" %>
+        <%= link_to 'back', activities_path %>
+    <%end%>
+</div>
+<div class="col-md-3">
+</div>

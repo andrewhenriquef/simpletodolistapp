@@ -1,7 +1,15 @@
 class ActivitiesController < ApplicationController
   
   def index
-    @activities = Activity.all
+    @activities = Activity.by_position
+  end
+
+  def sort
+    params[:order].each do |key, value|
+      Activity.find(value[:id]).update(position: value[:position])
+    end
+
+    render nothing: true
   end
 
   def new 
@@ -39,6 +47,15 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:id])
   end
 
+  def destroy
+    @activity = Activity.find(params[:id])
+
+    @activity.destroy
+
+    respond_to do |format|
+      format.html { redirect_to activities_url, notice: 'Activity was successfully destroyed.' }
+    end
+  end
   private
   
   def activity_params

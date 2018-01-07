@@ -1,7 +1,7 @@
-<div class="col-md-3">
+<div class="col-md-3 d-none d-sm-block">
 </div>
 
-<div class="col-md-6 card">
+<div class="col-md-6 col-xs-12 card form-card">
     <%= form_with model: @activity do |form|%>
         <div class="form-group">
             <%= form.label :title %>
@@ -11,5 +11,5 @@
         <%= link_to 'back', activities_path %>
     <%end%>
 </div>
-<div class="col-md-3">
+<div class="col-md-3 d-nonoe d-sm-block">
 </div>

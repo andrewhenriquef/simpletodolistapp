@@ -1,5 +1,6 @@
 class ActivitiesController < ApplicationController
-  
+  before_action :set_activity, only: [:show, :edit, :update, :destroy]
+
   def index
     @activities = Activity.by_position
   end
@@ -29,11 +30,9 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
-    @activity = Activity.find(params[:id])
   end
   
   def update
-    @activity = Activity.find(params[:id])
     respond_to do |format|
       if @activity.update(activity_params)
         format.html { redirect_to activities_path, notice: 'Your activity was updadated.' }
@@ -44,11 +43,9 @@ class ActivitiesController < ApplicationController
   end
   
   def show
-    @activity = Activity.find(params[:id])
   end
 
   def destroy
-    @activity = Activity.find(params[:id])
 
     @activity.destroy
 
@@ -60,6 +57,10 @@ class ActivitiesController < ApplicationController
   
   def activity_params
     params.require(:activity).permit(:title)
+  end
+
+  def set_activity
+    @activity = Activity.find(params[:id])
   end
 
 end

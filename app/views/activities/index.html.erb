@@ -1,22 +1,36 @@
-<h1>TODO List</h2>
-
-<%= link_to 'Create new activity', new_activity_path %>
-<div class="row">
+<div class="container">
+    <div class="col-md-12 text-center">
+        <h1>Simple TODO list app</h2>
+        <%= link_to 'Create new activity', new_activity_path %>
+    </div>
+    <div class="row">
         <h2 class=" col-md-12 text-center">Activities</h2>
-    <div class="col-md-4">
-    </div>
-    
+        
+        <div class="col-md-4">
+        </div>
 
-    <div class="col-md-4 sortable">
-        <% @activities.each do |activity| %>
-            <div class="card" data-id="<%= activity.id %>">
-                <p class="card-text"><%= activity.title %></p>
-                <%= link_to 'edit', edit_activity_path(activity)%>
-                <%= link_to 'delete' %>
-            </div>
-        <%end%>
-    </div>
+        <div class="col-md-4 sortable">
+            <% @activities.each do |activity| %>
+                <div class="card" data-id="<%= activity.id %>">
+                        <div class="col-md-8 title">
+                            <h5><b><%= activity.title%></b></h5>
+                        </div>
 
-    <div class="col-md-4">
+
+                        <div class="col-md-4 actions text-right">
+                            <%= link_to edit_activity_path(activity) do %>
+                                <%= fa_icon "pencil"%>
+                            <%end%>
+                            
+                            <%= link_to activity, method: :delete do %>
+                                <%= fa_icon "trash"%>
+                            <%end%>
+                        </div>
+                </div>
+            <%end%>
+        </div>
+
+        <div class="col-md-4">
+        </div>
     </div>
 </div>

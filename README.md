@@ -143,7 +143,6 @@ set_positions = ->
 ready = ->
   set_positions()
   $('.sortable').sortable()
-  $('.sortable').sortable().bind 'sortupdate'
   return
 
 $(document).ready ready

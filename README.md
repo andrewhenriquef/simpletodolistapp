@@ -5,25 +5,39 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+### Ruby version
 
-* System dependencies
+2.4.1
 
-* Configuration
+### Rails version
+5.1.4
 
-* Database creation
+### System dependencies
 
-* Database initialization
+```ruby
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
+gem 'jquery-rails'
+gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+gem 'pg', '~> 0.18'
+``` 
+### Configuration
+Create your `secrets.yml` inside config and 
+Set your database credentials `username:` and `password:`
 
-* How to run the test suite
+### Database creation
+```
+rails db:create
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Database initialization
+```
+rails db:migrate
+```
 
 * Deployment instructions
 
-* ...
-
-
+# Como criar uma aplicação simples de TODO list com rails
 
 Para criarmos uma aplicação simples de lista de afazeres utilizando do framework rails e da biblioteca de drag and drop, precisamos seguir os seguintes passos.
 
@@ -148,4 +162,72 @@ ready = ->
 $(document).ready ready
 ```
 
-Se tudo foi configurado corretamente o drag and drop já deve funcionar e você já pode trocar as atividades de lugar. Mas isso funciona apenas no front, se dermos um reload na página, as atividades voltarao as posições anteriores. E é nisso que vamos trabalhar agora, vamos editar nosso back-end, para que as posições quando trocadas sejam permanentes
+Se tudo foi configurado corretamente o drag and drop já deve funcionar e você já pode trocar as atividades de lugar. Mas isso funciona apenas no front, se dermos um reload na página, as atividades voltarao as posições anteriores. E é nisso que vamos trabalhar agora, vamos editar nosso back-end, para que as posições quando trocadas sejam permanentes.
+
+A primeira parte de nossa integração com o back-end é atualizar nossa função ready do `activities.coffee`
+
+```coffee
+ready = undefined
+set_positions = undefined
+
+set_positions = -> 
+  $('.card').each (i) ->
+    $(this).attr 'data-pos', i + 1
+    return
+  return
+ready = ->
+  set_positions()
+  $('.sortable').sortable()
+  $('.sortable').sortable().bind 'sortupdate', (e, ui) ->
+    updated_order = []
+    set_positions()
+    $('.card').each (i) ->
+      updated_order.push
+        id: $(this).data('id')
+        position: i + 1
+      return
+    $.ajax
+      type: 'PUT'
+      url: '/activities/sort'
+      data: order: updated_order
+    return
+  return
+
+$(document).ready ready
+```
+
+Com essa nova implementação, toda vez que movermos uma atividade, a ordem será alterada no nosso vetor `updated_order` e via ajax será enviado para a action 'sort' do nosso controller.
+
+Na action `sort` do controller atualizamos a `:position` de cada uma de nossas atividades. E na action `index` atualizamos para que a nossa lista de atividades seja com as posições corretas.
+
+```ruby
+  def index
+    @activities = Activity.by_position
+  end
+
+  def sort
+    params[:order].each do |key, value|
+      Activity.find(value[:id]).update(position: value[:position])
+    end
+
+    render nothing: true
+  end
+```
+
+No model implementamos a função responsavel por carregar a lista das atividades na ordem correta pela `:position`
+
+```ruby
+class Activity < ApplicationRecord
+  
+  def self.by_position
+    order("position ASC")
+  end
+
+end
+```
+
+Isso é o suficiente para que nossa aplicação consiga atualizar as ordens das atividades atraves drag and drop no front e no back-end da aplicação.
+
+
+
+
